@@ -1,0 +1,4 @@
+icon.png
+*.exe
+*.log
+build/**
