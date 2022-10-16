@@ -2,3 +2,4 @@ icon.png
 *.exe
 *.log
 build/**
+node_modules
