@@ -10,57 +10,64 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
     crossorigin="anonymous">
-  <script type="module">
-    // Import the functions you need from the SDKs you need
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.12.1/firebase-app.js";
-    // TODO: Add SDKs for Firebase products that you want to use
-    // https://firebase.google.com/docs/web/setup#available-libraries
-    import { getAuth } from "https://www.gstatic.com/firebasejs/9.12.1/firebase-auth.js";
-    import { getDatabase } from "https://www.gstatic.com/firebasejs/9.12.1/firebase-database.js";
-
-
-    // Your web app's Firebase configuration
-    const firebaseConfig = {
-      apiKey: "AIzaSyAV1V307onaIc89VbqWwyLjeOhaBB7c_uY",
-      authDomain: "just-move-34bca.firebaseapp.com",
-      projectId: "just-move-34bca",
-      storageBucket: "just-move-34bca.appspot.com",
-      messagingSenderId: "819104523329",
-      appId: "1:819104523329:web:50680cb9a30286975e92c0"
-
-    };
-
-    // Initialize Firebase
-    const app = firebase.initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-  </script>
 </head>
 
 <body>
+  <script type="module">
+    import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.12.1/firebase-app.js'
+
+    // If you enabled Analytics in your project, add the Firebase SDK for Google Analytics
+    import { getAnalytics } from 'https://www.gstatic.com/firebasejs/9.12.1/firebase-analytics.js'
+
+    // Add Firebase products that you want to use
+    import { getAuth } from 'https://www.gstatic.com/firebasejs/9.12.1/firebase-auth.js'
+    import { getFirestore } from 'https://www.gstatic.com/firebasejs/9.12.1/firebase-firestore.js'
+    import * as l from "./login.js"
+
+    const inputs = document.querySelectorAll('input');
+
+    for (const input of inputs) {
+      if (input.type == "email") {
+        input.onblur = l.handleEmailFieldBlur;
+      }
+      input.onfocus = l.handleFormFocus;
+    }
+
+    document.getElementById("loginPassword").onblur = l.handlePasswordConfirmFieldBlur;
+    document.getElementById("signUpPassword").onblur = l.handleSignUpPasswordFieldBlur;
+    document.getElementById("signUpPassword2").onblur = l.handlePasswordFieldBlur;
+
+    window.handleGuestButtonClick = l.handleGuestButtonClick;
+    document.getElementById("signUpForm").onclick = l.handleSignUpButtonClick;
+    document.getElementById("loginForm").onclick = l.handleLoginButtonClick;
+  </script>
+
+  <a style="display: none;" id="redirectMeHere" href="test.html">Ah, another visitor...</a>
   <h1 class="display-1 text-center">Just Move</h1>
   <div class="row row-cols-4 g-4">
     <div class="col"></div>
     <div class="col">
       <div class="card p-3">
         <h3 class="heading-5 text-center">Log In</h3>
-        <form>
-          <label for="loginEmail" ]>Email:</label>
+        <div>
+          <label for="loginEmail">Email:</label>
           <input type="email" class="form-control mb-3" id="loginEmail" required />
           <label for="loginPassword">Password:</label>
           <input type="password" class="form-control mb-3" id="loginPassword" required />
           <div class="d-grid">
-            <button type="submit" class="btn btn-primary">Log In</button>
+            <button id="loginForm" class="btn btn-primary">Log In</button>
           </div>
-        </form>
+        </div>
       </div>
       <a class="text-center text-muted small d-flex justify-content-center mt-2">Privacy Policy</a>
-      <div class="d-flex justify-content-center mt-3"><button class="btn btn-warning">Or continue as guest</button>
+      <div class="d-flex justify-content-center mt-3"><button class="btn btn-warning"
+          onclick="handleGuestButtonClick()">Or continue as guest</button>
       </div>
     </div>
     <div class="col">
       <div class="card p-3">
         <h3 class="heading-5 text-center">Sign Up</h3>
-        <form>
+        <div>
           <label for="signUpName">Name (Optional):</label>
           <input type="text" class="form-control mb-3" id="signUpName" />
           <label for="signUpEmail">Email:</label>
@@ -70,9 +77,9 @@
           <label for="signUpPassword2">Confirm password:</label>
           <input type="password" class="form-control mb-3" id="signUpPassword2" required />
           <div class="d-grid">
-            <button type="submit" class="btn btn-primary">Sign Up</button>
+            <button id="signUpForm" class="btn btn-primary">Sign Up</button>
           </div>
-        </form>
+        </div>
       </div>
     </div>
   </div>
