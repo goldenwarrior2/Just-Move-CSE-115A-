@@ -3,7 +3,7 @@ import { app, auth } from "./fbSetup.js"
 
 const redirectOnLogin = (user) => {
     if (user) {
-        document.getElementById("redirectMeHere").click();
+        window.location.href = "/main.html";
     }
 };
 var disableAuthCallback = onAuthStateChanged(auth, redirectOnLogin);

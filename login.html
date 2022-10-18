@@ -12,7 +12,7 @@
     crossorigin="anonymous">
 </head>
 
-<body>
+<body style="overflow-x: hidden;">
   <script type="module">
     import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.12.1/firebase-app.js'
 
@@ -42,7 +42,6 @@
     document.getElementById("loginForm").onclick = l.handleLoginButtonClick;
   </script>
 
-  <a style="display: none;" id="redirectMeHere" href="test.html">Ah, another visitor...</a>
   <h1 class="display-1 text-center">Just Move</h1>
   <div class="row row-cols-4 g-4">
     <div class="col"></div>
